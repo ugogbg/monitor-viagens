@@ -1,6 +1,6 @@
 {
   "meta": {
-    "gerado_em": "2026-06-12T14:56:30+00:00",
+    "gerado_em": "2026-06-12T15:21:04+00:00",
     "data_alvo": "2026-08-12",
     "valuation_milha_brl": 0.018,
     "confianca_geral": "provisoria",
@@ -30,7 +30,7 @@
       "link_momondo": "https://www.momondo.com.br/flight-search/GIG-CGH/2026-08-12?sort=price_a",
       "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/gig/cgh/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "GOL GIG-CGH direto diurno 14:15; milhas=GOL GIG direto 14900 tarifa padrao; custo milhas>dinheiro; Clube/Diamante exige login; IOF nao incide"
+      "obs": "GOL GIG-CGH direto diurno 14:15; milhas=GOL GIG direto 14900 tarifa padrao; custo milhas>dinheiro; Clube/Diamante exige login"
     },
     {
       "rota": "RJ-CGH",
@@ -54,7 +54,7 @@
       "link_momondo": "https://www.momondo.com.br/flight-search/SDU-CGH/2026-08-12?sort=price_a",
       "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/sdu/cgh/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "Menor dinheiro=GOL SDU-CGH direto (momondo 221; GF 247); milhas=GOL SDU direto 9500 tarifa padrao; Clube/Diamante exige login; taxas nao destacadas; IOF nao incide (domestico BRL)"
+      "obs": "Menor dinheiro=GOL SDU-CGH direto (momondo 221; GF 247); milhas=GOL SDU direto 9500 tarifa padrao; Clube/Diamante exige login; taxas nao destacadas"
     },
     {
       "rota": "RJ-CNF",
@@ -78,7 +78,7 @@
       "link_momondo": "https://www.momondo.com.br/flight-search/GIG-CNF/2026-08-12?sort=price_a",
       "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/gig/cnf/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "Dinheiro=Azul GIG-CNF direto 20:55 noturno (GF 312; momondo 337); milhas=GOL GIG direto 18100 (17600 via conexao); custo milhas~dinheiro; Clube/Diamante exige login; IOF nao incide"
+      "obs": "Dinheiro=Azul GIG-CNF direto 20:55 noturno (GF 312; momondo 337); milhas=GOL GIG direto 18100 (17600 via conexao); custo milhas~dinheiro; Clube/Diamante exige login"
     },
     {
       "rota": "RJ-CNF",
@@ -102,7 +102,7 @@
       "link_momondo": "https://www.momondo.com.br/flight-search/SDU-CNF/2026-08-12?sort=price_a",
       "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/sdu/cnf/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "Dinheiro=Azul SDU-CNF direto 17:10 (momondo 313; GF 338); milhas=Smiles SDU-CNF 21100 sem direto (1 parada); custo milhas>dinheiro; Clube/Diamante exige login; IOF nao incide"
+      "obs": "Dinheiro=Azul SDU-CNF direto 17:10 (momondo 313; GF 338); milhas=Smiles SDU-CNF 21100 sem direto (1 parada); custo milhas>dinheiro; Clube/Diamante exige login"
     },
     {
       "rota": "RJ-JJD",
@@ -126,7 +126,7 @@
       "link_momondo": "https://www.momondo.com.br/flight-search/GIG-JJD/2026-08-12?sort=price_a",
       "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/gig/jjd/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "Sem voo direto do RJ; melhor conexao=GOL GIG 1 parada GRU 1h20 6h 06:00-12:00 (R$1260 GF e momondo); +barato R$997 GF autotransferencia 28h30 impraticavel; milhas=GOL GIG 1 parada 6h 63900 (cash R$1259,81); Clube/Diamante exige login; IOF nao incide"
+      "obs": "Sem voo direto do RJ; melhor conexao=GOL GIG 1 parada GRU 1h20 6h 06:00-12:00 (R$1260 GF e momondo); +barato R$997 GF autotransferencia 28h30 impraticavel; milhas=GOL GIG 1 parada 6h 63900 (cash R$1259,81); Clube/Diamante exige login"
     },
     {
       "rota": "RJ-JJD",
@@ -150,7 +150,7 @@
       "link_momondo": "https://www.momondo.com.br/flight-search/SDU-JJD/2026-08-12?sort=price_a",
       "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/sdu/jjd/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "Sem voo direto; melhor conexao pratica=LATAM SDU 1 parada 8h25 mudanca aeroporto CGH-GRU R$1148 (GF e momondo); +barato R$1114 momondo 2 paradas 14h10 overnight; Smiles SEM voos SDU-JJD em 12/08 (milhas n/d); IOF nao incide"
+      "obs": "Sem voo direto; melhor conexao pratica=LATAM SDU 1 parada 8h25 mudanca aeroporto CGH-GRU R$1148 (GF e momondo); +barato R$1114 momondo 2 paradas 14h10 overnight; Smiles SEM voos SDU-JJD em 12/08 (milhas n/d)"
     }
   ],
   "promocoes": [],
