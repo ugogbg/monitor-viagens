@@ -65,6 +65,8 @@
   .promo .p-meta{font-size:.78rem;color:var(--muted);margin-top:2px}
   .empty{color:var(--muted);font-size:.88rem;padding:12px;background:var(--card);border-radius:var(--radius)}
   .chart-wrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+  .chart-box{position:relative;height:300px;width:100%}
+  .chart-box canvas{position:absolute;inset:0}
   .chart-controls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
   .chip{background:var(--card2);border:1px solid var(--line);color:var(--muted);
     padding:5px 11px;border-radius:20px;font-size:.78rem;cursor:pointer;user-select:none}
@@ -77,6 +79,7 @@
     body{padding:12px}
     .prices{flex-direction:column;gap:6px}
     .hide-sm{display:none}
+    .chart-box{height:240px}
   }
 </style>
 </head>
@@ -97,7 +100,7 @@
   <h2>Tendência de preço (dinheiro)</h2>
   <div class="chart-wrap">
     <div class="chart-controls" id="chartControls"></div>
-    <canvas id="chart" height="120"></canvas>
+    <div class="chart-box"><canvas id="chart"></canvas></div>
   </div>
 
   <h2>Promoções de milhas</h2>
@@ -235,11 +238,4 @@ function drawChart(keys){
       plugins:{legend:{labels:{color:"#92a0b8",boxWidth:12}},
         tooltip:{callbacks:{label:c=>c.dataset.label+": "+(c.parsed.y==null?"—":BRL(c.parsed.y))}}},
       scales:{
-        x:{ticks:{color:"#92a0b8"},grid:{color:"#2c3850"}},
-        y:{ticks:{color:"#92a0b8",callback:v=>"R$"+v},grid:{color:"#2c3850"}}}}
-  });
-}
-load();
-</script>
-</body>
-</html>
+        x:{ticks:{color:"#92a0b8"}
