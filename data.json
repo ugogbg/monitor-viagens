@@ -1,11 +1,11 @@
 {
   "meta": {
-    "gerado_em": "2026-06-12T14:42:55+00:00",
+    "gerado_em": "2026-06-12T14:56:30+00:00",
     "data_alvo": "2026-08-12",
     "valuation_milha_brl": 0.018,
     "confianca_geral": "provisoria",
     "tem_alerta": false,
-    "versao_painel": "1.0"
+    "versao_painel": "1.1"
   },
   "rotas": [
     {
@@ -13,6 +13,7 @@
       "origem": "GIG",
       "destino": "CGH",
       "direto": true,
+      "horario": "14:15",
       "preco_dinheiro_brl": 225.0,
       "fonte_dinheiro": "momondo (GOL direto 14:15; GF 229)",
       "preco_milhas": 14900,
@@ -27,6 +28,7 @@
       "atualizado": true,
       "link_gf": null,
       "link_momondo": "https://www.momondo.com.br/flight-search/GIG-CGH/2026-08-12?sort=price_a",
+      "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/gig/cgh/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
       "obs": "GOL GIG-CGH direto diurno 14:15; milhas=GOL GIG direto 14900 tarifa padrao; custo milhas>dinheiro; Clube/Diamante exige login; IOF nao incide"
     },
@@ -35,6 +37,7 @@
       "origem": "SDU",
       "destino": "CGH",
       "direto": true,
+      "horario": null,
       "preco_dinheiro_brl": 221.0,
       "fonte_dinheiro": "momondo (GOL direto; GF menor 247)",
       "preco_milhas": 9500,
@@ -49,6 +52,7 @@
       "atualizado": true,
       "link_gf": null,
       "link_momondo": "https://www.momondo.com.br/flight-search/SDU-CGH/2026-08-12?sort=price_a",
+      "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/sdu/cgh/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
       "obs": "Menor dinheiro=GOL SDU-CGH direto (momondo 221; GF 247); milhas=GOL SDU direto 9500 tarifa padrao; Clube/Diamante exige login; taxas nao destacadas; IOF nao incide (domestico BRL)"
     },
@@ -57,6 +61,7 @@
       "origem": "GIG",
       "destino": "CNF",
       "direto": true,
+      "horario": "20:55",
       "preco_dinheiro_brl": 312.0,
       "fonte_dinheiro": "Google Flights (Azul direto 20:55; momondo direto 337)",
       "preco_milhas": 18100,
@@ -71,6 +76,7 @@
       "atualizado": true,
       "link_gf": null,
       "link_momondo": "https://www.momondo.com.br/flight-search/GIG-CNF/2026-08-12?sort=price_a",
+      "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/gig/cnf/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
       "obs": "Dinheiro=Azul GIG-CNF direto 20:55 noturno (GF 312; momondo 337); milhas=GOL GIG direto 18100 (17600 via conexao); custo milhas~dinheiro; Clube/Diamante exige login; IOF nao incide"
     },
@@ -79,6 +85,7 @@
       "origem": "SDU",
       "destino": "CNF",
       "direto": true,
+      "horario": "17:10",
       "preco_dinheiro_brl": 313.0,
       "fonte_dinheiro": "momondo (Azul direto 17:10; GF 338)",
       "preco_milhas": 21100,
@@ -93,6 +100,7 @@
       "atualizado": true,
       "link_gf": null,
       "link_momondo": "https://www.momondo.com.br/flight-search/SDU-CNF/2026-08-12?sort=price_a",
+      "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/sdu/cnf/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
       "obs": "Dinheiro=Azul SDU-CNF direto 17:10 (momondo 313; GF 338); milhas=Smiles SDU-CNF 21100 sem direto (1 parada); custo milhas>dinheiro; Clube/Diamante exige login; IOF nao incide"
     },
@@ -101,6 +109,7 @@
       "origem": "GIG",
       "destino": "JJD",
       "direto": false,
+      "horario": "06:00",
       "preco_dinheiro_brl": 1260.0,
       "fonte_dinheiro": "Google Flights e momondo (GOL 1 parada GRU 6h)",
       "preco_milhas": 63900,
@@ -115,36 +124,16 @@
       "atualizado": true,
       "link_gf": null,
       "link_momondo": "https://www.momondo.com.br/flight-search/GIG-JJD/2026-08-12?sort=price_a",
+      "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/gig/jjd/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
       "obs": "Sem voo direto do RJ; melhor conexao=GOL GIG 1 parada GRU 1h20 6h 06:00-12:00 (R$1260 GF e momondo); +barato R$997 GF autotransferencia 28h30 impraticavel; milhas=GOL GIG 1 parada 6h 63900 (cash R$1259,81); Clube/Diamante exige login; IOF nao incide"
-    },
-    {
-      "rota": "RJ-JJD",
-      "origem": "RIO",
-      "destino": "JJD",
-      "direto": false,
-      "preco_dinheiro_brl": 872.0,
-      "fonte_dinheiro": "Google Flights e momondo (LATAM 2 paradas)",
-      "preco_milhas": 63900,
-      "taxas_milhas_brl": null,
-      "custo_efetivo_milhas_brl": 1150.2,
-      "fonte_milhas": "Smiles tarifa padrao deslogado",
-      "media_movel_12m_brl": 1027.0,
-      "limiar_70pct_brl": 718.9,
-      "alerta": false,
-      "vencedor": "dinheiro",
-      "confianca": "reduzida",
-      "atualizado": false,
-      "link_gf": null,
-      "link_momondo": "https://www.momondo.com.br/flight-search/RIO-JJD/2026-08-12?sort=price_a",
-      "link_smiles": "https://www.smiles.com.br/home",
-      "obs": "Sem voo direto do RJ; dinheiro=LATAM 2 paradas 9h35 (1 parada R$1044); milhas=GOL GIG 1 parada 6h (cash R$1259,81); Clube/Diamante exige login; IOF nao incide"
     },
     {
       "rota": "RJ-JJD",
       "origem": "SDU",
       "destino": "JJD",
       "direto": false,
+      "horario": null,
       "preco_dinheiro_brl": 1148.0,
       "fonte_dinheiro": "Google Flights e momondo (LATAM 1 parada 8h25)",
       "preco_milhas": null,
@@ -159,6 +148,7 @@
       "atualizado": true,
       "link_gf": null,
       "link_momondo": "https://www.momondo.com.br/flight-search/SDU-JJD/2026-08-12?sort=price_a",
+      "link_skyscanner": "https://www.skyscanner.com.br/transporte/voos/sdu/jjd/260812/?adultsv2=1&cabinclass=economy",
       "link_smiles": "https://www.smiles.com.br/home",
       "obs": "Sem voo direto; melhor conexao pratica=LATAM SDU 1 parada 8h25 mudanca aeroporto CGH-GRU R$1148 (GF e momondo); +barato R$1114 momondo 2 paradas 14h10 overnight; Smiles SEM voos SDU-JJD em 12/08 (milhas n/d); IOF nao incide"
     }
@@ -183,12 +173,6 @@
       {
         "data": "2026-06-12",
         "preco": 312.0
-      }
-    ],
-    "RJ-JJD|RIO": [
-      {
-        "data": "2026-06-11",
-        "preco": 872.0
       }
     ],
     "RJ-CGH|GIG": [
