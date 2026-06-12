@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Monitor de Viagens — Ugo</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1419; --card:#1a2230; --card2:#212b3d; --line:#2c3850;
+    --txt:#e6ecf5; --muted:#92a0b8; --accent:#4a9eff;
+    --ok:#2ecc71; --ok-bg:#16331f; --alert:#ff5a5a; --alert-bg:#3a1818;
+    --warn:#ffb648; --warn-bg:#33270f; --milhas:#b07bff; --dinheiro:#4a9eff;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.45;padding:16px;max-width:1100px;margin:0 auto}
+  h1{font-size:1.25rem;margin:0;font-weight:700}
+  h2{font-size:1rem;margin:28px 0 12px;font-weight:600;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .sub{color:var(--muted);font-size:.82rem;margin-top:3px}
+  .banner{margin:16px 0 4px;padding:14px 16px;border-radius:var(--radius);
+    font-weight:600;display:flex;align-items:center;gap:10px;font-size:1.02rem;border:1px solid transparent}
+  .banner.ok{background:var(--ok-bg);color:var(--ok);border-color:#1f5132}
+  .banner.alert{background:var(--alert-bg);color:var(--alert);border-color:#6e2626}
+  .banner .ico{font-size:1.3rem;line-height:1}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px}
+  .card.is-alert{border-color:var(--alert);box-shadow:0 0 0 1px var(--alert) inset}
+  .card.is-stale{opacity:.72}
+  .route-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+  .route-name{font-weight:700;font-size:1.05rem}
+  .badge{font-size:.66rem;font-weight:700;padding:3px 7px;border-radius:20px;
+    text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+  .badge.alert{background:var(--alert);color:#fff}
+  .badge.ok{background:#23344a;color:var(--muted)}
+  .badge.stale{background:var(--warn-bg);color:var(--warn);border:1px solid #5a4516}
+  .badge.win{background:#1d2c44;color:var(--accent)}
+  .prices{display:flex;gap:10px;margin:6px 0}
+  .price{flex:1;background:var(--card2);border-radius:10px;padding:9px 10px}
+  .price .lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .price .val{font-size:1.18rem;font-weight:700;margin-top:2px}
+  .price.dinheiro .val{color:var(--dinheiro)}
+  .price.milhas .val{color:var(--milhas)}
+  .price .eq{font-size:.72rem;color:var(--muted);margin-top:1px}
+  .meta-line{font-size:.76rem;color:var(--muted);margin-top:7px}
+  .links{display:flex;gap:12px;margin-top:9px;font-size:.8rem;flex-wrap:wrap}
+  .obs{font-size:.72rem;color:var(--muted);margin-top:8px;font-style:italic}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.alert td{background:var(--alert-bg)}
+  .promo{border-left:3px solid var(--milhas);padding:10px 13px;background:var(--card2);
+    border-radius:0 10px 10px 0;margin-bottom:8px}
+  .promo.new{border-left-color:var(--alert)}
+  .promo .p-top{font-weight:600}
+  .promo .p-meta{font-size:.78rem;color:var(--muted);margin-top:2px}
+  .empty{color:var(--muted);font-size:.88rem;padding:12px;background:var(--card);border-radius:var(--radius)}
+  .chart-wrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+  .chart-controls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{background:var(--card2);border:1px solid var(--line);color:var(--muted);
+    padding:5px 11px;border-radius:20px;font-size:.78rem;cursor:pointer;user-select:none}
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:.76rem;color:var(--muted)}
+  footer b{color:var(--txt)}
+  .foot-warn{margin-top:8px;color:var(--warn)}
+  @media(max-width:520px){
+    body{padding:12px}
+    .prices{flex-direction:column;gap:6px}
+    .hide-sm{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div>
+      <h1>✈️ Monitor de Viagens</h1>
+      <div class="sub" id="sub">Carregando…</div>
+    </div>
+    <div class="sub" id="target"></div>
+  </div>
+
+  <div id="banner" class="banner ok"><span class="ico">⏳</span><span>Carregando dados…</span></div>
+
+  <h2>Passagens por rota</h2>
+  <div class="grid" id="cards"></div>
+
+  <h2>Tendência de preço (dinheiro)</h2>
+  <div class="chart-wrap">
+    <div class="chart-controls" id="chartControls"></div>
+    <canvas id="chart" height="120"></canvas>
+  </div>
+
+  <h2>Promoções de milhas</h2>
+  <div id="promos"></div>
+
+  <footer id="footer"></footer>
+
+<script>
+const BRL = v => v==null ? "—" : v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const MI  = v => v==null ? "—" : v.toLocaleString("pt-BR") + " mi";
+const PCT = (a,b) => (a==null||b==null||b===0) ? null : Math.round(a/b*100);
+const esc = s => (s==null?"":String(s)).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+let chart=null, hist={}, histKeys=[];
+
+async function load(){
+  try{
+    const r = await fetch("./data.json?v="+Date.now(), {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    render(await r.json());
+  }catch(e){
+    document.getElementById("banner").className="banner alert";
+    document.getElementById("banner").innerHTML='<span class="ico">⚠️</span><span>Não foi possível carregar data.json ('+esc(e.message)+'). O painel é publicado pela tarefa diária.</span>';
+    document.getElementById("sub").textContent="Sem dados";
+  }
+}
+
+function render(d){
+  const m = d.meta||{};
+  const dt = m.gerado_em ? new Date(m.gerado_em) : null;
+  document.getElementById("sub").textContent = dt
+    ? "Atualizado em "+dt.toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"})
+    : "Sem data de geração";
+  document.getElementById("target").innerHTML = m.data_alvo
+    ? "Data-alvo do voo<br><b style='color:var(--txt)'>"+esc(m.data_alvo)+"</b> · só ida · 1 pax" : "";
+
+  const rotas = d.rotas||[];
+  const alertas = rotas.filter(x=>x.alerta);
+  const b = document.getElementById("banner");
+  if(alertas.length){
+    b.className="banner alert";
+    b.innerHTML='<span class="ico">🔴</span><span>'+alertas.length+' ALERTA(S): '
+      + alertas.map(x=>esc(x.rota+" "+x.origem)+" "+BRL(x.preco_dinheiro_brl)).join(" · ')
+      + ' — confira e decida a emissão você mesmo.</span>';
+  }else{
+    b.className="banner ok";
+    b.innerHTML='<span class="ico">✓</span><span>Sem alertas hoje — nenhuma rota ≤ 70% da média móvel.</span>';
+  }
+
+  // cards
+  const cards = rotas.map(x=>{
+    const pct = PCT(x.preco_dinheiro_brl, x.media_movel_12m_brl);
+    const stale = x.atualizado===false;
+    const win = x.vencedor;
+    const cls = ["card"]; if(x.alerta) cls.push("is-alert"); if(stale) cls.push("is-stale");
+    let badge="";
+    if(stale) badge='<span class="badge stale">desatualizado</span>';
+    else if(x.alerta) badge='<span class="badge alert">🔴 alerta</span>';
+    else badge='<span class="badge ok">'+(pct!=null?pct+"% da média":"sem baseline")+'</span>';
+    const winBadge = win ? '<span class="badge win">'+(win==="empate"?"R$ ≈ empate":"R$ menor: "+win)+'</span>' : "";
+    return `<div class="${cls.join(" ")}">
+      <div class="route-top">
+        <span class="route-name">${esc(x.rota)} · ${esc(x.origem)}</span>
+        ${badge}
+      </div>
+      <div class="prices">
+        <div class="price dinheiro"><div class="lbl">Dinheiro</div>
+          <div class="val">${BRL(x.preco_dinheiro_brl)}</div>
+          <div class="eq">${esc(x.fonte_dinheiro||"")}${x.direto?" · direto":" · conexão"}</div></div>
+        <div class="price milhas"><div class="lbl">Milhas</div>
+          <div class="val">${MI(x.preco_milhas)}</div>
+          <div class="eq">≈ ${BRL(x.custo_efetivo_milhas_brl)} efetivo</div></div>
+      </div>
+      <div class="meta-line">Média móvel 12m: ${BRL(x.media_movel_12m_brl)} · gatilho (70%): ${BRL(x.limiar_70pct_brl)} ${winBadge}</div>
+      <div class="links">
+        ${x.link_gf?`<a href="${esc(x.link_gf)}" target="_blank" rel="noopener">Google Flights ↗</a>`:""}
+        ${x.link_momondo?`<a href="${esc(x.link_momondo)}" target="_blank" rel="noopener">momondo ↗</a>`:""}
+        ${x.link_smiles?`<a href="${esc(x.link_smiles)}" target="_blank" rel="noopener">Smiles ↗</a>`:""}
+      </div>
+      ${x.obs?`<div class="obs">${esc(x.obs)}</div>`:""}
+    </div>`;
+  }).join("");
+  document.getElementById("cards").innerHTML = cards || '<div class="empty">Sem rotas no último snapshot.</div>';
+
+  // chart
+  hist = d.historico||{};
+  histKeys = Object.keys(hist);
+  buildChartControls();
+  drawChart(histKeys.slice(0,3));
+
+  // promos
+  const promos = d.promocoes||[];
+  const ativas = promos.filter(p=>p.atende);
+  document.getElementById("promos").innerHTML = ativas.length
+    ? ativas.map(p=>`<div class="promo ${p.novo?"new":""}">
+        <div class="p-top">${p.novo?"🆕 ":""}${esc(p.programa)} — ${esc(p.metrica||"")} ${esc(p.valor_pct)}% (${esc(p.nivel||"")})
+          ${esc(p.categoria==="compra_milhas"?"compra":"transferência "+(p.origem_pontos||""))}</div>
+        <div class="p-meta">limiar ${esc(p.limiar_pct)}% · validade ${esc(p.validade||"n/d")} ·
+          <a href="${esc(p.link||"#")}" target="_blank" rel="noopener">${esc(p.fonte||"fonte")} ↗</a></div>
+      </div>`).join("")
+    : '<div class="empty">Nenhuma campanha cruzou o limiar hoje (compra ≥330%/≥78% · transferência Itaú→Smiles ≥70%).</div>';
+
+  // footer
+  const conf = (m.confianca_geral||"provisoria");
+  document.getElementById("footer").innerHTML =
+    `Premissas: valuation Smiles <b>${BRL(m.valuation_milha_brl||0.018)}/milha</b> · câmbio spot · IOF vigente (não incide em compra doméstica em BRL) · compra ~3 meses de antecedência.
+     Gatilho de alerta = preço em dinheiro ≤ 70% da média móvel de 12 meses.
+     <div class="foot-warn">⚠ Confiança <b>${esc(conf)}</b> enquanto não houver 12 meses de histórico. Valores informativos — confirme na fonte antes de emitir. Você decide e executa a emissão/compra; o painel só monitora.</div>`;
+}
+
+function buildChartControls(){
+  const c = document.getElementById("chartControls");
+  const sel = new Set(histKeys.slice(0,3));
+  c.innerHTML = histKeys.map(k=>`<span class="chip ${sel.has(k)?"on":""}" data-k="${esc(k)}">${esc(k.replace("|"," · "))}</span>`).join("");
+  c.querySelectorAll(".chip").forEach(el=>el.onclick=()=>{
+    el.classList.toggle("on");
+    drawChart([...c.querySelectorAll(".chip.on")].map(e=>e.dataset.k));
+  });
+}
+
+const PALETTE=["#4a9eff","#b07bff","#2ecc71","#ffb648","#ff5a5a","#36d6c3"];
+function drawChart(keys){
+  const allDates=[...new Set(keys.flatMap(k=>(hist[k]||[]).map(p=>p.data)))].sort();
+  const ds = keys.map((k,i)=>({
+    label:k.replace("|"," · "),
+    data:allDates.map(dt=>{const p=(hist[k]||[]).find(x=>x.data===dt);return p?p.preco:null;}),
+    borderColor:PALETTE[i%PALETTE.length], backgroundColor:PALETTE[i%PALETTE.length],
+    spanGaps:true, tension:.25, pointRadius:2
+  }));
+  if(chart) chart.destroy();
+  chart = new Chart(document.getElementById("chart"),{
+    type:"line",
+    data:{labels:allDates.map(d=>d.slice(5)), datasets:ds},
+    options:{responsive:true, maintainAspectRatio:false, interaction:{mode:"index",intersect:false},
+      plugins:{legend:{labels:{color:"#92a0b8",boxWidth:12}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+": "+(c.parsed.y==null?"—":BRL(c.parsed.y))}}},
+      scales:{
+        x:{ticks:{color:"#92a0b8"},grid:{color:"#2c3850"}},
+        y:{ticks:{color:"#92a0b8",callback:v=>"R$"+v},grid:{color:"#2c3850"}}}}
+  });
+}
+load();
+</script>
+</body>
+</html>
