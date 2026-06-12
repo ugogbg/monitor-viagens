@@ -162,7 +162,7 @@ function render(d){
       + '<div class="prices">'
       +   '<div class="price dinheiro"><div class="lbl">Dinheiro</div>'
       +     '<div class="val">'+BRL(x.preco_dinheiro_brl)+'</div>'
-      +     '<div class="eq">'+esc(x.fonte_dinheiro||"")+(x.direto?" · direto":" · conexão")+'</div></div>'
+      +     '<div class="eq">'+esc(x.fonte_dinheiro||"")+(x.direto?" · direto":" · conexão")+(x.horario?" · "+esc(x.horario):"")+'</div></div>'
       +   '<div class="price milhas"><div class="lbl">Milhas</div>'
       +     '<div class="val">'+MI(x.preco_milhas)+'</div>'
       +     '<div class="eq">≈ '+BRL(x.custo_efetivo_milhas_brl)+' efetivo</div></div>'
@@ -171,6 +171,7 @@ function render(d){
       + '<div class="links">'
       +   (x.link_gf?'<a href="'+esc(x.link_gf)+'" target="_blank" rel="noopener">Google Flights ↗</a>':"")
       +   (x.link_momondo?'<a href="'+esc(x.link_momondo)+'" target="_blank" rel="noopener">momondo ↗</a>':"")
+      +   (x.link_skyscanner?'<a href="'+esc(x.link_skyscanner)+'" target="_blank" rel="noopener">Skyscanner ↗</a>':"")
       +   (x.link_smiles?'<a href="'+esc(x.link_smiles)+'" target="_blank" rel="noopener">Smiles ↗</a>':"")
       + '</div>'
       + (x.obs?'<div class="obs">'+esc(x.obs)+'</div>':"")
@@ -198,6 +199,7 @@ function render(d){
   document.getElementById("footer").innerHTML =
     'Premissas: valuation Smiles <b>'+BRL(m.valuation_milha_brl||0.018)+'/milha</b> · câmbio spot · IOF vigente (não incide em compra doméstica em BRL) · compra ~3 meses de antecedência. '
     + 'Gatilho de alerta = preço em dinheiro ≤ 70% da média móvel de 12 meses.'
+    + '<div style="margin-top:8px">🔎 <b>Google Flights</b> não permite link direto para a busca. Parâmetros de pesquisa: só ida · 1 passageiro · econômica · data-alvo '+esc(m.data_alvo||"")+'. Quando o menor preço vier do Google Flights, o horário do voo mais barato aparece no card — abra o GF e busque por essa rota/data.</div>'
     + '<div class="foot-warn">⚠ Confiança <b>'+esc(conf)+'</b> enquanto não houver 12 meses de histórico. Valores informativos — confirme na fonte antes de emitir. Você decide e executa a emissão/compra; o painel só monitora.</div>';
 }
 
@@ -236,4 +238,3 @@ load();
 </script>
 </body>
 </html>
-                                                                                                                    
