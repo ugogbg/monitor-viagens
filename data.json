@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "gerado_em": "2026-06-11T13:24:00-03:00",
+    "data_alvo": "2026-08-12",
+    "valuation_milha_brl": 0.018,
+    "confianca_geral": "provisoria",
+    "tem_alerta": false,
+    "versao_painel": "1.0"
+  },
+  "rotas": [
+    {
+      "rota": "RJ-CGH", "origem": "SDU", "destino": "CGH", "direto": true,
+      "preco_dinheiro_brl": 207.0, "fonte_dinheiro": "Google Flights",
+      "preco_milhas": 9500, "taxas_milhas_brl": null, "custo_efetivo_milhas_brl": 171.0,
+      "fonte_milhas": "Smiles (padrao, deslogado)",
+      "media_movel_12m_brl": 212.5, "limiar_70pct_brl": 148.75,
+      "alerta": false, "vencedor": "milhas", "confianca": "provisoria", "atualizado": true,
+      "link_gf": "https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=Voos%20de%20SDU%20para%20CGH%20somente%20ida%202026-08-12",
+      "link_momondo": "https://www.momondo.com.br/flight-search/SDU-CGH/2026-08-12?sort=price_a",
+      "link_smiles": "https://www.smiles.com.br/home",
+      "obs": "GOL SDU direto; Clube/Diamante exige login; IOF nao incide (domestico BRL)"
+    },
+    {
+      "rota": "RJ-CGH", "origem": "GIG", "destino": "CGH", "direto": true,
+      "preco_dinheiro_brl": 232.0, "fonte_dinheiro": "momondo",
+      "preco_milhas": 14900, "taxas_milhas_brl": null, "custo_efetivo_milhas_brl": 268.2,
+      "fonte_milhas": "Smiles (padrao, deslogado)",
+      "media_movel_12m_brl": 232.0, "limiar_70pct_brl": 162.4,
+      "alerta": false, "vencedor": "dinheiro", "confianca": "provisoria", "atualizado": true,
+      "link_gf": "https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=Voos%20de%20GIG%20para%20CGH%20somente%20ida%202026-08-12",
+      "link_momondo": "https://www.momondo.com.br/flight-search/GIG-CGH/2026-08-12?sort=price_a",
+      "link_smiles": "https://www.smiles.com.br/home",
+      "obs": "Par novo (sem baseline); media = leitura de hoje"
+    },
+    {
+      "rota": "RJ-CNF", "origem": "GIG", "destino": "CNF", "direto": true,
+      "preco_dinheiro_brl": 338.0, "fonte_dinheiro": "Google Flights",
+      "preco_milhas": 18100, "taxas_milhas_brl": null, "custo_efetivo_milhas_brl": 325.8,
+      "fonte_milhas": "Smiles (padrao, deslogado)",
+      "media_movel_12m_brl": 338.0, "limiar_70pct_brl": 236.6,
+      "alerta": false, "vencedor": "empate", "confianca": "provisoria", "atualizado": true,
+      "link_gf": "https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=Voos%20de%20GIG%20para%20CNF%20somente%20ida%202026-08-12",
+      "link_momondo": "https://www.momondo.com.br/flight-search/GIG-CNF/2026-08-12?sort=price_a",
+      "link_smiles": "https://www.smiles.com.br/home",
+      "obs": "GOL GIG direto"
+    },
+    {
+      "rota": "RJ-CNF", "origem": "SDU", "destino": "CNF", "direto": false,
+      "preco_dinheiro_brl": 338.0, "fonte_dinheiro": "Google Flights",
+      "preco_milhas": 21100, "taxas_milhas_brl": null, "custo_efetivo_milhas_brl": 379.8,
+      "fonte_milhas": "Smiles (padrao, deslogado)",
+      "media_movel_12m_brl": 338.0, "limiar_70pct_brl": 236.6,
+      "alerta": false, "vencedor": "dinheiro", "confianca": "provisoria", "atualizado": true,
+      "link_gf": "https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=Voos%20de%20SDU%20para%20CNF%20somente%20ida%202026-08-12",
+      "link_momondo": "https://www.momondo.com.br/flight-search/SDU-CNF/2026-08-12?sort=price_a",
+      "link_smiles": "https://www.smiles.com.br/home",
+      "obs": "Smiles sem voo direto SDU-CNF; 1 parada"
+    },
+    {
+      "rota": "RJ-JJD", "origem": "GIG", "destino": "JJD", "direto": false,
+      "preco_dinheiro_brl": 732.0, "fonte_dinheiro": "momondo",
+      "preco_milhas": 57500, "taxas_milhas_brl": null, "custo_efetivo_milhas_brl": 1035.0,
+      "fonte_milhas": "Smiles (padrao, deslogado)",
+      "media_movel_12m_brl": 732.0, "limiar_70pct_brl": 512.4,
+      "alerta": false, "vencedor": "dinheiro", "confianca": "provisoria", "atualizado": true,
+      "link_gf": "https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=Voos%20de%20GIG%20para%20JJD%20somente%20ida%202026-08-12",
+      "link_momondo": "https://www.momondo.com.br/flight-search/GIG-JJD/2026-08-12?sort=price_a",
+      "link_smiles": "https://www.smiles.com.br/home",
+      "obs": "Sem voo direto do RJ (via GRU/FOR)"
+    },
+    {
+      "rota": "RJ-JJD", "origem": "SDU", "destino": "JJD", "direto": false,
+      "preco_dinheiro_brl": 974.0, "fonte_dinheiro": "Google Flights",
+      "preco_milhas": null, "taxas_milhas_brl": null, "custo_efetivo_milhas_brl": null,
+      "fonte_milhas": "Smiles (sem voos)",
+      "media_movel_12m_brl": 974.0, "limiar_70pct_brl": 681.8,
+      "alerta": false, "vencedor": "dinheiro", "confianca": "provisoria", "atualizado": true,
+      "link_gf": "https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=Voos%20de%20SDU%20para%20JJD%20somente%20ida%202026-08-12",
+      "link_momondo": "https://www.momondo.com.br/flight-search/SDU-JJD/2026-08-12?sort=price_a",
+      "link_smiles": "https://www.smiles.com.br/home",
+      "obs": "Smiles 'sem voos' para este par; milhas n/d"
+    }
+  ],
+  "promocoes": [
+    {
+      "categoria": "transferencia", "programa": "Smiles", "origem_pontos": "Itau",
+      "metrica": "bonus", "valor_pct": 100, "nivel": "Diamante", "limiar_pct": 70,
+      "atende": true, "validade": "2026-06-30",
+      "fonte": "Melhores Destinos", "link": "https://www.melhoresdestinos.com.br/", "novo": true
+    }
+  ],
+  "historico": {
+    "RJ-CGH|SDU": [
+      {"data": "2026-06-09", "preco": 224.0},
+      {"data": "2026-06-10", "preco": 218.0},
+      {"data": "2026-06-11", "preco": 207.0}
+    ],
+    "RJ-CGH|GIG": [
+      {"data": "2026-06-11", "preco": 232.0}
+    ],
+    "RJ-CNF|GIG": [
+      {"data": "2026-06-10", "preco": 351.0},
+      {"data": "2026-06-11", "preco": 338.0}
+    ],
+    "RJ-CNF|SDU": [
+      {"data": "2026-06-11", "preco": 338.0}
+    ],
+    "RJ-JJD|GIG": [
+      {"data": "2026-06-11", "preco": 732.0}
+    ],
+    "RJ-JJD|SDU": [
+      {"data": "2026-06-11", "preco": 974.0}
+    ]
+  }
+}
