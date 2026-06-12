@@ -197,7 +197,7 @@ function render(d){
 
   const conf = (m.confianca_geral||"provisoria");
   document.getElementById("footer").innerHTML =
-    'Premissas: valuation Smiles <b>'+BRL(m.valuation_milha_brl||0.018)+'/milha</b> · câmbio spot · IOF vigente (não incide em compra doméstica em BRL) · compra ~3 meses de antecedência. '
+    'Premissas: valuation Smiles <b>'+BRL(m.valuation_milha_brl||0.018)+'/milha</b> · câmbio spot · IOF só quando há incidência (ex.: compra internacional em moeda estrangeira) · compra ~3 meses de antecedência. '
     + 'Gatilho de alerta = preço em dinheiro ≤ 70% da média móvel de 12 meses.'
     + '<div style="margin-top:8px">🔎 <b>Google Flights</b> não permite link direto para a busca. Parâmetros de pesquisa: só ida · 1 passageiro · econômica · data-alvo '+esc(m.data_alvo||"")+'. Quando o menor preço vier do Google Flights, o horário do voo mais barato aparece no card — abra o GF e busque por essa rota/data.</div>'
     + '<div class="foot-warn">⚠ Confiança <b>'+esc(conf)+'</b> enquanto não houver 12 meses de histórico. Valores informativos — confirme na fonte antes de emitir. Você decide e executa a emissão/compra; o painel só monitora.</div>';
