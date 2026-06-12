@@ -140,7 +140,7 @@ function render(d){
   if(alertas.length){
     b.className="banner alert";
     b.innerHTML='<span class="ico">🔴</span><span>'+alertas.length+' ALERTA(S): '
-      + alertas.map(x=>esc(x.rota+" "+x.origem)+" "+BRL(x.preco_dinheiro_brl)).join(" · ')
+      + alertas.map(x=>esc(x.rota+" "+x.origem)+" "+BRL(x.preco_dinheiro_brl)).join(" · ")
       + ' — confira e decida a emissão você mesmo.</span>';
   }else{
     b.className="banner ok";
