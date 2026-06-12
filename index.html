@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
 <title>Monitor de Viagens — Ugo</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%E2%9C%88%EF%B8%8F</text></svg>" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root{
@@ -53,11 +53,6 @@
   .meta-line{font-size:.76rem;color:var(--muted);margin-top:7px}
   .links{display:flex;gap:12px;margin-top:9px;font-size:.8rem;flex-wrap:wrap}
   .obs{font-size:.72rem;color:var(--muted);margin-top:8px;font-style:italic}
-  table{width:100%;border-collapse:collapse;font-size:.85rem}
-  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
-  th{color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
-  td.num{text-align:right;font-variant-numeric:tabular-nums}
-  tr.alert td{background:var(--alert-bg)}
   .promo{border-left:3px solid var(--milhas);padding:10px 13px;background:var(--card2);
     border-radius:0 10px 10px 0;margin-bottom:8px}
   .promo.new{border-left-color:var(--alert)}
@@ -150,7 +145,6 @@ function render(d){
     b.innerHTML='<span class="ico">✓</span><span>Sem alertas hoje — nenhuma rota ≤ 70% da média móvel.</span>';
   }
 
-  // cards
   const cards = rotas.map(x=>{
     const pct = PCT(x.preco_dinheiro_brl, x.media_movel_12m_brl);
     const stale = x.atualizado===false;
@@ -161,60 +155,56 @@ function render(d){
     else if(x.alerta) badge='<span class="badge alert">🔴 alerta</span>';
     else badge='<span class="badge ok">'+(pct!=null?pct+"% da média":"sem baseline")+'</span>';
     const winBadge = win ? '<span class="badge win">'+(win==="empate"?"R$ ≈ empate":"R$ menor: "+win)+'</span>' : "";
-    return `<div class="${cls.join(" ")}">
-      <div class="route-top">
-        <span class="route-name">${esc(x.rota)} · ${esc(x.origem)}</span>
-        ${badge}
-      </div>
-      <div class="prices">
-        <div class="price dinheiro"><div class="lbl">Dinheiro</div>
-          <div class="val">${BRL(x.preco_dinheiro_brl)}</div>
-          <div class="eq">${esc(x.fonte_dinheiro||"")}${x.direto?" · direto":" · conexão"}</div></div>
-        <div class="price milhas"><div class="lbl">Milhas</div>
-          <div class="val">${MI(x.preco_milhas)}</div>
-          <div class="eq">≈ ${BRL(x.custo_efetivo_milhas_brl)} efetivo</div></div>
-      </div>
-      <div class="meta-line">Média móvel 12m: ${BRL(x.media_movel_12m_brl)} · gatilho (70%): ${BRL(x.limiar_70pct_brl)} ${winBadge}</div>
-      <div class="links">
-        ${x.link_gf?`<a href="${esc(x.link_gf)}" target="_blank" rel="noopener">Google Flights ↗</a>`:""}
-        ${x.link_momondo?`<a href="${esc(x.link_momondo)}" target="_blank" rel="noopener">momondo ↗</a>`:""}
-        ${x.link_smiles?`<a href="${esc(x.link_smiles)}" target="_blank" rel="noopener">Smiles ↗</a>`:""}
-      </div>
-      ${x.obs?`<div class="obs">${esc(x.obs)}</div>`:""}
-    </div>`;
+    return '<div class="'+cls.join(" ")+'">'
+      + '<div class="route-top">'
+      +   '<span class="route-name">'+esc(x.rota)+' · '+esc(x.origem)+'</span>'+badge
+      + '</div>'
+      + '<div class="prices">'
+      +   '<div class="price dinheiro"><div class="lbl">Dinheiro</div>'
+      +     '<div class="val">'+BRL(x.preco_dinheiro_brl)+'</div>'
+      +     '<div class="eq">'+esc(x.fonte_dinheiro||"")+(x.direto?" · direto":" · conexão")+'</div></div>'
+      +   '<div class="price milhas"><div class="lbl">Milhas</div>'
+      +     '<div class="val">'+MI(x.preco_milhas)+'</div>'
+      +     '<div class="eq">≈ '+BRL(x.custo_efetivo_milhas_brl)+' efetivo</div></div>'
+      + '</div>'
+      + '<div class="meta-line">Média móvel 12m: '+BRL(x.media_movel_12m_brl)+' · gatilho (70%): '+BRL(x.limiar_70pct_brl)+' '+winBadge+'</div>'
+      + '<div class="links">'
+      +   (x.link_gf?'<a href="'+esc(x.link_gf)+'" target="_blank" rel="noopener">Google Flights ↗</a>':"")
+      +   (x.link_momondo?'<a href="'+esc(x.link_momondo)+'" target="_blank" rel="noopener">momondo ↗</a>':"")
+      +   (x.link_smiles?'<a href="'+esc(x.link_smiles)+'" target="_blank" rel="noopener">Smiles ↗</a>':"")
+      + '</div>'
+      + (x.obs?'<div class="obs">'+esc(x.obs)+'</div>':"")
+      + '</div>';
   }).join("");
   document.getElementById("cards").innerHTML = cards || '<div class="empty">Sem rotas no último snapshot.</div>';
 
-  // chart
   hist = d.historico||{};
   histKeys = Object.keys(hist);
   buildChartControls();
   drawChart(histKeys.slice(0,3));
 
-  // promos
   const promos = d.promocoes||[];
   const ativas = promos.filter(p=>p.atende);
   document.getElementById("promos").innerHTML = ativas.length
-    ? ativas.map(p=>`<div class="promo ${p.novo?"new":""}">
-        <div class="p-top">${p.novo?"🆕 ":""}${esc(p.programa)} — ${esc(p.metrica||"")} ${esc(p.valor_pct)}% (${esc(p.nivel||"")})
-          ${esc(p.categoria==="compra_milhas"?"compra":"transferência "+(p.origem_pontos||""))}</div>
-        <div class="p-meta">limiar ${esc(p.limiar_pct)}% · validade ${esc(p.validade||"n/d")} ·
-          <a href="${esc(p.link||"#")}" target="_blank" rel="noopener">${esc(p.fonte||"fonte")} ↗</a></div>
-      </div>`).join("")
+    ? ativas.map(p=>'<div class="promo '+(p.novo?"new":"")+'">'
+        + '<div class="p-top">'+(p.novo?"🆕 ":"")+esc(p.programa)+' — '+esc(p.metrica||"")+' '+esc(p.valor_pct)+'% ('+esc(p.nivel||"")+') '
+        +   esc(p.categoria==="compra_milhas"?"compra":"transferência "+(p.origem_pontos||""))+'</div>'
+        + '<div class="p-meta">limiar '+esc(p.limiar_pct)+'% · validade '+esc(p.validade||"n/d")+' · '
+        +   '<a href="'+esc(p.link||"#")+'" target="_blank" rel="noopener">'+esc(p.fonte||"fonte")+' ↗</a></div>'
+        + '</div>').join("")
     : '<div class="empty">Nenhuma campanha cruzou o limiar hoje (compra ≥330%/≥78% · transferência Itaú→Smiles ≥70%).</div>';
 
-  // footer
   const conf = (m.confianca_geral||"provisoria");
   document.getElementById("footer").innerHTML =
-    `Premissas: valuation Smiles <b>${BRL(m.valuation_milha_brl||0.018)}/milha</b> · câmbio spot · IOF vigente (não incide em compra doméstica em BRL) · compra ~3 meses de antecedência.
-     Gatilho de alerta = preço em dinheiro ≤ 70% da média móvel de 12 meses.
-     <div class="foot-warn">⚠ Confiança <b>${esc(conf)}</b> enquanto não houver 12 meses de histórico. Valores informativos — confirme na fonte antes de emitir. Você decide e executa a emissão/compra; o painel só monitora.</div>`;
+    'Premissas: valuation Smiles <b>'+BRL(m.valuation_milha_brl||0.018)+'/milha</b> · câmbio spot · IOF vigente (não incide em compra doméstica em BRL) · compra ~3 meses de antecedência. '
+    + 'Gatilho de alerta = preço em dinheiro ≤ 70% da média móvel de 12 meses.'
+    + '<div class="foot-warn">⚠ Confiança <b>'+esc(conf)+'</b> enquanto não houver 12 meses de histórico. Valores informativos — confirme na fonte antes de emitir. Você decide e executa a emissão/compra; o painel só monitora.</div>';
 }
 
 function buildChartControls(){
   const c = document.getElementById("chartControls");
   const sel = new Set(histKeys.slice(0,3));
-  c.innerHTML = histKeys.map(k=>`<span class="chip ${sel.has(k)?"on":""}" data-k="${esc(k)}">${esc(k.replace("|"," · "))}</span>`).join("");
+  c.innerHTML = histKeys.map(k=>'<span class="chip '+(sel.has(k)?"on":"")+'" data-k="'+esc(k)+'">'+esc(k.replace("|"," · "))+'</span>').join("");
   c.querySelectorAll(".chip").forEach(el=>el.onclick=()=>{
     el.classList.toggle("on");
     drawChart([...c.querySelectorAll(".chip.on")].map(e=>e.dataset.k));
@@ -238,4 +228,12 @@ function drawChart(keys){
       plugins:{legend:{labels:{color:"#92a0b8",boxWidth:12}},
         tooltip:{callbacks:{label:c=>c.dataset.label+": "+(c.parsed.y==null?"—":BRL(c.parsed.y))}}},
       scales:{
-        x:{ticks:{color:"#92a0b8"}
+        x:{ticks:{color:"#92a0b8"},grid:{color:"#2c3850"}},
+        y:{ticks:{color:"#92a0b8",callback:v=>"R$"+v},grid:{color:"#2c3850"}}}}
+  });
+}
+load();
+</script>
+</body>
+</html>
+                                                                                                                    
